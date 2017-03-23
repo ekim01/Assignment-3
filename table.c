@@ -165,6 +165,7 @@ char * nextItem()
 {
   char *item = NULL;
   
+  assert(traverseNode != NULL);
   // no need to go past the end of the list...
   if ( traverseNode != NULL )
   {
@@ -172,5 +173,6 @@ char * nextItem()
     traverseNode = traverseNode->next;
   }
   
+  assert(strcmp(traverseNode->string,item));
   return item;
 }
