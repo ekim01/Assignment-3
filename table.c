@@ -84,16 +84,21 @@ Boolean delete( char const * const target )
   Node *curr = top;
   Node *prev = NULL;
   
-  while ( curr != NULL && strcmp( target, curr->string ) != 0 )
+  assert(target != NULL);
+  if(target != NULL)
   {
-    prev = curr;
-    curr = curr->next;
+    while ( curr != NULL && strcmp( target, curr->string ) != 0 )
+    {
+        prev = curr;
+        curr = curr->next;
+    }
   }
 
   //check to make sure we've actually found the target
+  assert(numNodes>=1);
+  assert(strcmp(target,curr->string));
   if(strcmp(target,curr->string))
-  {
-    assert(strcmp(target,curr->string));  
+  { 
     if ( curr != NULL )
     {
         if( prev != NULL )
@@ -107,6 +112,7 @@ Boolean delete( char const * const target )
         free( curr );
         deleted = true;
         numNodes--;
+        assert(numNodes>=0);
     }
   }
   
@@ -118,20 +124,23 @@ Boolean search( char const * const target )
 {
   Boolean found = false;
   Node *curr = top;
-  
-  while ( curr != NULL && !found )
+  assert(target != NULL);
+  if(target != NULL)
   {
-    assert(!found);
-    if ( strcmp( target, curr->string ) == 0 )
+    while ( curr != NULL && !found )
     {
-      found = true;
-    } 
-    else
-    {
-      curr = curr->next;
+        assert(!found);
+        if ( strcmp( target, curr->string ) == 0 )
+        {
+            assert(curr->string != NULL);
+            found = true;
+        } 
+        else
+        {
+            curr = curr->next;
+        }
     }
-  }
-  
+  }  
   return found;
 }
 
@@ -140,8 +149,14 @@ Boolean search( char const * const target )
 char * firstItem()
 {
   traverseNode = top->next;
-  
-  return top->string;
+  assert(traverseNode != NULL && numNodes > 0)
+  if(traverseNode != NULL)
+  {
+      return top->string;
+  }else
+  {
+      return NULL;
+  }
 }
 
 
