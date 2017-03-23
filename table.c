@@ -37,25 +37,37 @@ Boolean insert( char const * const new_string )
   Boolean rc = true;
   Node *newNode = NULL;
   
+  assert(new_string != NULL);
+
   newNode = (Node *)malloc( sizeof( Node ) );
+
+  assert(newNode != NULL);
+  if(newNode != NULL)
+  { 
+    newNode->next = top;
+    top = newNode;
   
-  newNode->next = top;
-  top = newNode;
-  
-  // note that we need to have space for the string as well!
+  //note that we need to have space for the string as well!
   //make sure node string is empty and we're not replacing something
-  if(newNode->string == NULL)
-  {
-    assert(newNode->string == NULL);
-    newNode->string = (char *)malloc( strlen(new_string) + 1 );
-    strcpy( newNode->string, new_string );
-    if(strcmp(newNode->string,new_string))
+    if(newNode->string == NULL)
     {
-        assert(strcmp(newNode->string,new_string));
-        numNodes++;
+        newNode->string = (char *)malloc( strlen(new_string) + 1 );
+        assert(newNode->string != NULL);
+        if(newNode->string != NULL)
+        {
+            strcpy( newNode->string, new_string );
+            if(strcmp(newNode->string,new_string))
+            {
+                assert(strcmp(newNode->string,new_string));
+                numNodes++;
+            }else
+            {
+                rc = false;
+            }
+        }
     }else
     {
-        rc = false;
+          rc = false;
     }
   }else
   {
@@ -109,11 +121,11 @@ Boolean search( char const * const target )
   
   while ( curr != NULL && !found )
   {
+    assert(!found);
     if ( strcmp( target, curr->string ) == 0 )
     {
       found = true;
-    }
-    
+    } 
     else
     {
       curr = curr->next;
