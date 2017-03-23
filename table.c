@@ -41,25 +41,19 @@ Boolean insert( char const * const new_string )
   
   //note that we need to have space for the string as well!
   //make sure node string is empty and we're not replacing something
-    if(newNode->string == NULL)
+    newNode->string = (char *)malloc( strlen(new_string) + 1 );
+    assert(newNode->string != NULL);
+    if(newNode->string != NULL)
     {
-        newNode->string = (char *)malloc( strlen(new_string) + 1 );
-        assert(newNode->string != NULL);
-        if(newNode->string != NULL)
+        strcpy( newNode->string, new_string );
+        assert(strcmp(newNode->string,new_string) == 0);
+        if(strcmp(newNode->string,new_string) == 0)
         {
-            strcpy( newNode->string, new_string );
-            if(strcmp(newNode->string,new_string))
-            {
-                assert(strcmp(newNode->string,new_string));
-                numNodes++;
-            }else
-            {
-                rc = false;
-            }
+            numNodes++;
+        }else
+        {
+            rc = false;
         }
-    }else
-    {
-          rc = false;
     }
   }else
   {
@@ -76,35 +70,37 @@ Boolean delete( char const * const target )
   Node *curr = top;
   Node *prev = NULL;
   
-  assert(target != NULL);
-  if(target != NULL)
-  {
-    while ( curr != NULL && strcmp( target, curr->string ) != 0 )
+  if(curr != NULL){
+    assert(top != NULL);
+    assert(target != NULL);
+    if(target != NULL)
     {
-        prev = curr;
-        curr = curr->next;
+      while ( curr != NULL && strcmp( target, curr->string ) != 0 )
+      {
+          prev = curr;
+          curr = curr->next;
+      }
     }
-  }
-
-  //check to make sure we've actually found the target
-  assert(numNodes>=1);
-  assert(strcmp(target,curr->string));
-  if(strcmp(target,curr->string))
-  { 
-    if ( curr != NULL )
-    {
-        if( prev != NULL )
-        {
-         prev->next = curr->next;
-        }else
-        {
-         top = curr->next;
-        }
-        free( curr->string );
-        free( curr );
-        deleted = true;
-        numNodes--;
-        assert(numNodes>=0);
+  
+    //check to make sure we've actually found the target
+    assert(strcmp(target,curr->string)==0);
+    if(strcmp(target,curr->string)==0)
+    { 
+      if ( curr != NULL )
+      {
+          if( prev != NULL )
+          {
+           prev->next = curr->next;
+          }else
+          {
+           top = curr->next;
+          }
+          free( curr->string );
+          free( curr );
+          deleted = true;
+          numNodes--;
+          assert(numNodes>=0);
+      }
     }
   }
   
@@ -140,14 +136,13 @@ Boolean search( char const * const target )
 // starts a list traversal by getting the data at top
 char * firstItem()
 {
-  traverseNode = top->next;
-  assert(traverseNode != NULL && numNodes > 0);
-  if(traverseNode != NULL)
-  {
-      return top->string;
+  if(top != NULL){
+    assert(top != NULL);
+    traverseNode = top->next;  
+    return top->string;
   }else
   {
-      return NULL;
+    return NULL;
   }
 }
 
@@ -162,6 +157,9 @@ char * nextItem()
   {
     item = traverseNode->string;
     traverseNode = traverseNode->next;
+  }else{
+    item = NULL;
   }
+  
   return item;
 }
