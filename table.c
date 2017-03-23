@@ -150,7 +150,7 @@ Boolean search( char const * const target )
 char * firstItem()
 {
   traverseNode = top->next;
-  assert(traverseNode != NULL && numNodes > 0)
+  assert(traverseNode != NULL && numNodes > 0);
   if(traverseNode != NULL)
   {
       return top->string;
