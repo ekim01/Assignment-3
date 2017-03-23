@@ -46,10 +46,17 @@ Boolean insert( char const * const new_string )
   //make sure node string is empty and we're not replacing something
   if(newNode->string == NULL)
   {
-    
+    assert(newNode->string == NULL);
     newNode->string = (char *)malloc( strlen(new_string) + 1 );
     strcpy( newNode->string, new_string );
-    numNodes++;
+    if(strcmp(newNode->string,new_string))
+    {
+        assert(strcmp(newNode->string,new_string));
+        numNodes++;
+    }else
+    {
+        rc = false;
+    }
   }else
   {
       rc = false;
