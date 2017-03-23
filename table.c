@@ -21,7 +21,14 @@ static Node *traverseNode = NULL;
 
 int size( )
 {
-    return numNodes;
+    if(numNodes >=0)
+    {
+        assert(numNodes >= 0);
+        return numNodes;
+    }else
+    {
+        return -1;
+    }
 }
     
 // add an element to the beginning of the linked list
@@ -36,10 +43,17 @@ Boolean insert( char const * const new_string )
   top = newNode;
   
   // note that we need to have space for the string as well!
-  newNode->string = (char *)malloc( strlen(new_string) + 1 );
-  strcpy( newNode->string, new_string );
-  numNodes++;
-  
+  //make sure node string is empty and we're not replacing something
+  if(newNode->string == NULL)
+  {
+    
+    newNode->string = (char *)malloc( strlen(new_string) + 1 );
+    strcpy( newNode->string, new_string );
+    numNodes++;
+  }else
+  {
+      rc = false;
+  }
   return rc;
 }
 
