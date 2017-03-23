@@ -78,17 +78,24 @@ Boolean delete( char const * const target )
     curr = curr->next;
   }
 
-  if ( curr != NULL )
+  //check to make sure we've actually found the target
+  if(strcmp(target,curr->string))
   {
-    if ( prev != NULL )
-      prev->next = curr->next;
-    else
-      top = curr->next;
-    
-    free( curr->string );
-    free( curr );
-    deleted = true;
-    numNodes--;
+    assert(strcmp(target,curr->string));  
+    if ( curr != NULL )
+    {
+        if( prev != NULL )
+        {
+         prev->next = curr->next;
+        }else
+        {
+         top = curr->next;
+        }
+        free( curr->string );
+        free( curr );
+        deleted = true;
+        numNodes--;
+    }
   }
   
   return deleted;
