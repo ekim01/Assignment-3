@@ -2,17 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include "table.h"
 
-typedef enum BOOL { false, true } Boolean;
-
-// Linked list node definition
-typedef struct NODE Node;
-
-struct NODE
-{
-  char *string;
-  Node *next;
-};
 
 static Node *top = NULL;
 static int numNodes = 0;
@@ -166,14 +157,11 @@ char * nextItem()
 {
   char *item = NULL;
   
-  assert(traverseNode != NULL);
   // no need to go past the end of the list...
   if ( traverseNode != NULL )
   {
     item = traverseNode->string;
     traverseNode = traverseNode->next;
   }
-  
-  assert(strcmp(traverseNode->string,item));
   return item;
 }
