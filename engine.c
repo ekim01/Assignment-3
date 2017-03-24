@@ -1,12 +1,16 @@
 #include "engine.h"
 #include "table.h"
+#include "levenshtein.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
 
-static char currWord[WORDMAX];
+static char* currWord;
 static int smallest = WORDMAX;
 
-void scanDict(FILE input,const char *s)
+void scanDict(FILE *input,const char *s)
 {
-    char word[WORDMAX];
+    char* word = NULL;
 
     assert(input != NULL);
     if(input != NULL)
@@ -43,7 +47,7 @@ char* closestWord()
 void listWords()
 {
     char ans = 'x';
-    char word[WORDMAX];
+    char* word = NULL;
 
     word = firstItem();
     printf("%s\n",word);  //list the first item in the table
@@ -56,7 +60,7 @@ void listWords()
     }
     //tell user to quit with q
     printf("Continue listing words with enter,q then enter to stop \n");
-    scanf("%s", ans);
+    scanf("%s", &ans);
     while(ans != 'q')          //only stop if sent a q
     {
         for(int i = 0; i< LISTAMT; i++)
@@ -73,7 +77,7 @@ void listWords()
         if(ans != 'q')
         {
             printf("Continue listing words with enter,q then enter to stop \n");
-            scanf("%s", ans);
+            scanf("%s", &ans);
         }
     }
 }
