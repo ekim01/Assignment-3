@@ -22,3 +22,5 @@ Boolean search( char const * const target );
 char * firstItem();
 
 char * nextItem();
+
+void clear();

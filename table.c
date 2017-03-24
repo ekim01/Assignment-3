@@ -163,3 +163,10 @@ char * nextItem()
   
   return item;
 }
+
+void clear()
+{
+  top = NULL;
+  numNodes = 0;
+  traverseNode = NULL;
+}

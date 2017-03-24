@@ -54,6 +54,10 @@ int main(void)
      }
      assert(firstItem());
      assert(nextItem());
+     clear();
+     assert(!firstItem());
+     assert(!nextItem());
+     assert(size() == 0);
      printf("test done \n");
 
     return 0;
