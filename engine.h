@@ -11,3 +11,5 @@ char* closestWord();
 void listWords();
 
 void reset();
+
+void runProgram(FILE *input);

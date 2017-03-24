@@ -95,3 +95,35 @@ void reset()
     clear();
     smallest = WORDMAX;
 }
+
+void runProgram(FILE *input)
+{
+    char word[WORDMAX];
+    char answer;
+
+    assert(input != NULL);
+    if(input != NULL)
+    {
+        printf("what word should i check? ");
+        scanf("%s", word);
+        printf("%s\n",word);
+        scanDict(input,word);
+        printf("Did you mean... %s \n", closestWord());
+        printf("There are %d other similar words, would you like to see them? (y/n)", size());
+        scanf(" %c",&answer);
+        if(answer == 'y' || answer == 'n')
+        {
+            if(answer == 'y')
+            {
+                listWords();
+            }
+        }else{
+            printf("answer must either be y/n");
+        }
+        reset();
+    }else
+    {
+        printf("Could not open file \n")
+    }
+
+}
