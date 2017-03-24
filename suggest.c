@@ -22,9 +22,10 @@ int main(int argc, char *argv[])
             printf("what word should i check? ");
             scanf("%s", word);
             printf("%s\n",word);
+            scanDict(input,word);
             printf("Did you mean... %s \n", closestWord());
-            printf("There are %d other similar words, would you like to see them? (y\n)", size());
-            scanf("%c",&answer);
+            printf("There are %d other similar words, would you like to see them? (y/n)", size());
+            scanf(" %c",&answer);
             if(answer == 'y' || answer == 'n')
             {
                 if(answer == 'y')
@@ -34,6 +35,7 @@ int main(int argc, char *argv[])
             }else{
                 printf("answer must either be y/n");
             }
+            reset();
 
         }
         else

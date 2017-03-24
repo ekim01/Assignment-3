@@ -9,3 +9,5 @@ void scanDict(FILE *input,const char *s);
 char* closestWord();
 
 void listWords();
+
+void reset();
