@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
         assert(input != NULL);
         if(input != NULL)
         {
-            runProgram();
+            runProgram(input);
         }
         else
         {

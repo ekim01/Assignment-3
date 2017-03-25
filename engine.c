@@ -108,22 +108,36 @@ void runProgram(FILE *input)
         scanf("%s", word);
         printf("%s\n",word);
         scanDict(input,word);
-        printf("Did you mean... %s \n", closestWord());
-        printf("There are %d other similar words, would you like to see them? (y/n)", size());
-        scanf(" %c",&answer);
-        if(answer == 'y' || answer == 'n')
+        if(size() < 2)
         {
-            if(answer == 'y')
+            //theres only one similar word just ask if its that
+            if(size() == 1)
             {
-                listWords();
+                printf("Did you mean... %s \n",closestWord());
+                printf("There are no other similar words");
+            }
+            if(size() == 0)     //no similar words found can't do much
+            {
+                printf("No similar words found");
             }
         }else{
-            printf("answer must either be y/n");
+            printf("Did you mean... %s \n", closestWord());
+            printf("There are %d other similar words, would you like to see them? (y/n)", size());
+            scanf(" %c",&answer);
+            if(answer == 'y' || answer == 'n')
+            {
+                if(answer == 'y')
+                {
+                    listWords();
+                }
+            }else{
+                printf("answer must either be y/n");
+            }
         }
         reset();
     }else
     {
-        printf("Could not open file \n")
+        printf("Could not open file \n");
     }
 
 }
