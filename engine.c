@@ -37,6 +37,10 @@ void scanDict(FILE *input,const char *s)
             }
         }
     }
+    else
+    {
+        printf("input is null");
+    }
 }
 
 char* closestWord()
