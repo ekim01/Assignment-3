@@ -2,8 +2,6 @@
 #include <assert.h>
 #include <stdio.h>
 
-#define TESTN 50
-
 int main(int argc,char *argv[])
 {
     FILE* input;
