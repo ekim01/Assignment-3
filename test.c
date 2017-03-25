@@ -22,10 +22,24 @@ int main(int argc,char *argv[])
         //check functions that only need table for one item
         printf("tests for one item in table \n");
         insert("hello");
-        assert(strcmp(closestWord(),"hello")==0);
         assert(listWords()); //should print hello and thats it
         reset();
         assert(size() == 0);  //everything should be empty again;
+        printf("test for 12 items");
+        insert("hell");
+        insert("bell");
+        insert("tear");
+        insert("torn");
+        insert("tree");
+        insert("crow");
+        insert("brow");
+        insert("lose");
+        insert("nine");
+        insert("ten");
+        insert("boom");
+        insert("pew");
+        listWords();      //should list all of them
+        reset();
         input = fopen(argv[1], "r");
         assert(input != NULL);
         if(input != NULL)
