@@ -57,7 +57,13 @@ void listWords()
     for(int i = 0; i < LISTAMT-1; i++)
     {
         word = nextItem();
-        printf("%s",word);
+        if(word == NULL)
+        {
+            i = LISTAMT+1;
+        }else
+        {
+            printf("%s",word);
+        }
     }
     //tell user to quit with q
     printf("Continue listing words with enter,q then enter to stop \n");
@@ -114,11 +120,11 @@ void runProgram(FILE *input)
             if(size() == 1)
             {
                 printf("Did you mean... %s \n",closestWord());
-                printf("There are no other similar words");
+                printf("There are no other similar words \n");
             }
             if(size() == 0)     //no similar words found can't do much
             {
-                printf("No similar words found");
+                printf("No similar words found \n");
             }
         }else{
             printf("Did you mean... %s \n", closestWord());
