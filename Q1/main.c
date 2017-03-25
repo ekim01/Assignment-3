@@ -54,6 +54,8 @@ int main(void)
      }
      assert(firstItem());
      assert(nextItem());
+     printf("passed test 4 now on final test");
+     //now test clear function there should still be things in the table but after fclear it should be gone
      clear();
      assert(!firstItem());
      assert(!nextItem());
